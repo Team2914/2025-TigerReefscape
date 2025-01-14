@@ -192,6 +192,12 @@ public class SwerveModule {
                 new Rotation2d(turningEncoder.getPosition()));
 
         // Command driving and turning SPARKS MAX towards their respective setpoints.
+
+
+        //System.out.println("Optimized: (drive) " + optimizedDesiredState.speedMetersPerSecond + "; (turn)" + optimizedDesiredState.angle.getRadians());
+        //System.out.println("(driveEncoder) " + drivingEncoder.getPosition() + " & " + drivingEncoder.getVelocity());
+        System.out.println("TurnEncoder position is " + turningEncoder.getPosition() + " & encoding velocity is " + turningEncoder.getVelocity());
+        //System.out.prin tln("Log: " + optimizedDesiredState.speedMetersPerSecond + " " + optimizedDesiredState.angle.getRadians());
         drivingClosedLoopController.setReference(optimizedDesiredState.speedMetersPerSecond,
                 SparkMax.ControlType.kVelocity);
         turningClosedLoopController.setReference(optimizedDesiredState.angle.getRadians(), SparkMax.ControlType.kPosition);

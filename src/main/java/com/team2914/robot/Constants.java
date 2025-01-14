@@ -53,15 +53,15 @@ public final class Constants {
 
         // SPARK MAX CAN IDs
         // TODO: update CAN IDs
-        public static final int kFrontLeftDrivingCanId = 6;
-        public static final int kRearLeftDrivingCanId = 2;
-        public static final int kFrontRightDrivingCanId = 8;
-        public static final int kRearRightDrivingCanId = 4;
+        public static final int kFrontLeftDrivingCanId = 4;
+        public static final int kRearLeftDrivingCanId = 17;
+        public static final int kFrontRightDrivingCanId = 12;
+        public static final int kRearRightDrivingCanId = 14;
 
-        public static final int kFrontLeftTurningCanId = 7;
+        public static final int kFrontLeftTurningCanId = 5;
         public static final int kRearLeftTurningCanId = 3;
-        public static final int kFrontRightTurningCanId = 9;
-        public static final int kRearRightTurningCanId = 5;
+        public static final int kFrontRightTurningCanId = 7;
+        public static final int kRearRightTurningCanId = 9;
 
         public static final boolean kGyroReversed = false;
     }
@@ -90,57 +90,8 @@ public final class Constants {
             //public static RobotConfig ROBOT_CONFIG = new RobotConfig(MASS_KG, MOI, new ModuleConfig(null, null, MASS_KG, null, null, 0), null);
     }
 
-    public static final class LinearActuatorsConstants {
-        public static int PID = 0;
-    }
-
     public static final class NeoMotorConstants {
         public static final double FREE_SPEED_RPM = 5676;
-    }
-
-    public static final class ShooterConstants {
-        public static final int TOP_MOTOR_ID = 12;
-        public static final int BOTTOM_MOTOR_ID = 17;
-        //public static final int BELT_MOTOR_ID = 18;
-
-        public static final double SHOOTER_TOP_SPEED = 1;
-        public static final double SHOOTER_BOTTOM_SPEED = .7;
-
-        public static final double AMP_TOP_SPEED = .6;
-        public static final double AMP_BOTTOM_SPEED = .3;
-        
-        public static final int BELT_SPEED = 1;
-        public static final int SHOOT_TIME = 1;
-    }
-
-    public static final class IntakeConstants {
-        public static final int MOTOR_ID = 917;
-        public static final int INTAKE_TIME = 2000; // in ms
-
-        public static final int LEFT_ARM = 16;
-        public static final int RIGHT_ARM = 15;
-    }
-
-    public static final class FanConstants {
-        public static final int MOTOR_ID = 999;
-        public static final int FAN_SPEED = 1; // LMAO
-    }
-
-    public static final class FlipperConstants {
-        public static final int MOTOR_ID = 14;
-        public static final float LIMIT = 5;
-    }
-
-    public static final class ClimberConstants {
-        public static final int LEFT_MOTOR = 15;
-        public static final int RIGHT_MOTOR = 16;
-
-        public static final float UPPER_LIMIT = -2.2f;
-        public static final float LOWER_LIMIT = -4.7789f;
-
-        public static final float LIMIT_CREEP = .02f; // INC/DEC the limit by this for every 20ms that the climber is moving
-
-        public static final double CLIMBER_SPEED = .75;
     }
 
     public static final class ModuleConstants {

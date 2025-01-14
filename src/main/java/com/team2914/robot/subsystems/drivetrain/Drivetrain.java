@@ -220,6 +220,7 @@ public class Drivetrain extends SubsystemBase {
         double xSpeedCommanded;
         double ySpeedCommanded;
 
+        
         if (rateLimit) {
             // Convert XY to polar for rate limiting
             double inputTranslationDir = Math.atan2(ySpeed, xSpeed);
@@ -273,6 +274,8 @@ public class Drivetrain extends SubsystemBase {
         double xSpeedDelivered = xSpeedCommanded * DriveConstants.kMaxSpeedMetersPerSecond;
         double ySpeedDelivered = ySpeedCommanded * DriveConstants.kMaxSpeedMetersPerSecond;
         double rotDelivered = m_currentRotation * DriveConstants.kMaxAngularSpeed;
+
+        //System.out.println("Log: " +xSpeedDelivered+ " " + ySpeedDelivered+ " " + rotDelivered);
 
         var swerveModuleStates = kinematics.toSwerveModuleStates(
                 fieldRelative
