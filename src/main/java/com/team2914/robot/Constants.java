@@ -4,13 +4,10 @@
 
 package com.team2914.robot;
 
-import com.pathplanner.lib.config.ModuleConfig;
 import com.pathplanner.lib.config.PIDConstants;
-import com.pathplanner.lib.config.RobotConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
 
@@ -45,7 +42,7 @@ public final class Constants {
         public static final double kBackRightChassisAngularOffset = Math.PI;
 
         // Distance between front and back wheels on robot
-        public static final SwerveDriveKinematics DRIVE_KINEMATICS = new SwerveDriveKinematics(
+        public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
             new Translation2d(kWheelBase / 2, kTrackWidth / 2),
             new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
             new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
@@ -146,6 +143,8 @@ public final class Constants {
         public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
         public static final int kDrivingMotorCurrentLimit = 50; // amps
-        public static final int kTurningMotorCurrentLimit = 20; // amps
+        public static final int kTurningMotorCurrentLimit = 15; // amps
+
+        public static final double kGlobalRampRate = 0.02;
     }
 }

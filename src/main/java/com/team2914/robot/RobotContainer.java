@@ -4,10 +4,17 @@
 
 package com.team2914.robot;
 
-import com.pathplanner.lib.auto.AutoBuilder;
-import com.team2914.robot.subsystems.DriverController;
-import com.team2914.robot.subsystems.drivetrain.Drivetrain;
+import org.photonvision.targeting.PhotonTrackedTarget;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.team2914.robot.Constants.VisionConstants;
+import com.team2914.robot.subsystems.DriverController;
+import com.team2914.robot.subsystems.Drivetrain;
+import com.team2914.robot.subsystems.Vision;
+
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Transform2d;
+import edu.wpi.first.math.geometry.Transform3d;
 // import edu.wpi.first.math.controller.ClosedLoopController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,7 +32,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
  */
 public class RobotContainer {
     private final Drivetrain drivetrain = Drivetrain.getInstance();
-    //private final Vision vision = Vision.getInstance();
+    private final Vision vision = Vision.getInstance();
     private final SendableChooser<Command> autoChooser;
 
 
@@ -41,13 +48,12 @@ public class RobotContainer {
             new RunCommand(
                 () -> drivetrain.drive(
                     driverController.getLeftY(), 
-                    driverController.getLeftX(), 
+                    driverController.getLeftX(),
                     driverController.getRightX(), 
-                    false, 
                     false), 
                 drivetrain));
 
-        /* 
+        
         vision.setDefaultCommand(new RunCommand(() -> {
             if(driverController.getAButtonPressed() && vision.hasTargets()){
 
@@ -56,16 +62,17 @@ public class RobotContainer {
                 if(target == null) return;
 
                 if(!VisionConstants.closeAllignable(target.getFiducialId())) return;
-
-                ClosedLoopController controlller = MiscUtil.ClosedLoopControllerFromConstants(new PIDConstants(9, 0, 0));
-
-
-                //drivetrain.drive(-controller.calculate(range, ))
                  
-                while (vision.hasTargets() && !(target.getYaw() <= 1.5 && target.getYaw() > 0)) { //Fps Issue I think -j
-                    double rotationSpeed = controlller.calculate(target.getYaw(), Math.PI);
-                    drivetrain.drive(0, 0, rotationSpeed, false, false);
-                }
+                PIDController controller = new PIDController(1, 0, 0);
+                //while (vision.hasTargets() && !(target.getYaw() <= 1.5 && target.getYaw() > 0)) { //Fps Issue I think -j
+                    double rotationSpeed = controller.calculate(target.getYaw()/*, Math.PI */);
+
+                    System.out.println("rot " + rotationSpeed);
+                    System.out.println("a " + target.getYaw());
+                    drivetrain.drive(0, 0, rotationSpeed, false);
+                //}
+
+                controller.close();
                
 
                 //Position off of target (https://docs.photonvision.org/en/latest/docs/programming/photonlib/using-target-data.html)
@@ -77,13 +84,13 @@ public class RobotContainer {
                 if(target.getYaw() <= 1.5) return;
                 double rotationSpeed = controlller.calculate(target.getYaw(), Math.PI);
                 drivetrain.drive(0, 0, rotationSpeed, false, false);
-                
+                */
                 
             }
             
         
         }, vision));
-        */
+        
 
         autoChooser = AutoBuilder.buildAutoChooser();
         

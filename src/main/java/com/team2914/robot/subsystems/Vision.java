@@ -12,10 +12,8 @@ import org.photonvision.targeting.PhotonTrackedTarget;
 
 import com.team2914.robot.Robot;
 import com.team2914.robot.Constants.VisionConstants;
-import com.team2914.robot.subsystems.drivetrain.Drivetrain;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
-import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
