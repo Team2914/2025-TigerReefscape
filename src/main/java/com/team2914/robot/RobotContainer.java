@@ -10,6 +10,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.team2914.robot.Constants.VisionConstants;
 import com.team2914.robot.subsystems.DriverController;
 import com.team2914.robot.subsystems.Drivetrain;
+import com.team2914.robot.subsystems.Intake;
 import com.team2914.robot.subsystems.Vision;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -37,6 +38,8 @@ public class RobotContainer {
 
 
     private final DriverController driverController = DriverController.getInstance();
+    private final Intake intake = Intake.getInstance();
+
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -47,11 +50,26 @@ public class RobotContainer {
         drivetrain.setDefaultCommand(
             new RunCommand(
                 () -> drivetrain.drive(
-                    driverController.getLeftY(), 
-                    driverController.getLeftX(),
-                    driverController.getRightX(), 
-                    false), 
+                    driverController.getLeftY() / 2, 
+                    driverController.getLeftX() / 2,
+                    driverController.getRightX() / 2, 
+                    true), 
                 drivetrain));
+
+        intake.setDefaultCommand(new RunCommand(() -> {
+                if (driverController.getLeftBumper()) {
+                    intake.spin(true, false);
+                }
+
+                if (driverController.getRightBumper()) {
+                    intake.spin(true, true);
+                } else if(!driverController.getLeftBumper()) {
+                    intake.spin(false, false);
+                }
+
+            }   
+            , intake)
+        );
 
         
         vision.setDefaultCommand(new RunCommand(() -> {
@@ -61,7 +79,11 @@ public class RobotContainer {
 
                 if(target == null) return;
 
+                System.out.println("Found target");
+
                 if(!VisionConstants.closeAllignable(target.getFiducialId())) return;
+
+                System.out.println("Alignable!");
                  
                 PIDController controller = new PIDController(1, 0, 0);
                 //while (vision.hasTargets() && !(target.getYaw() <= 1.5 && target.getYaw() > 0)) { //Fps Issue I think -j
@@ -95,7 +117,7 @@ public class RobotContainer {
         autoChooser = AutoBuilder.buildAutoChooser();
         
         
-        SmartDashboard.putData("Auto Chooser", autoChooser);
+        SmartDashboard.putData("Set Auto", autoChooser);
     }
 
     /**
@@ -104,6 +126,7 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
+        //return new RunCommand(() -> {}, drivetrain);
         return autoChooser.getSelected();
     }
 }

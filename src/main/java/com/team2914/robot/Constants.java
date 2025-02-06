@@ -19,6 +19,10 @@ public final class Constants {
         public static final double kDriveDeadband = 0.05;
     }
 
+    public static final class ArmConstants {
+        public static final int armMotor = 0;
+    }
+
     public static final class DriveConstants {
         // Driving Parameters - Note that these are not the maximum capable speeds of
         // the robot, rather the allowed maximum speeds
@@ -66,7 +70,7 @@ public final class Constants {
     public static final class VisionConstants {
 
         public static boolean closeAllignable(int aprilId){
-            return (aprilId == 6 || aprilId == 1 || aprilId == 5 || aprilId == 7 || aprilId == 12 || aprilId == 10);
+            return (aprilId == 6 || aprilId == 1 || aprilId == 5 || aprilId == 7 || aprilId == 12 || aprilId == 10 || aprilId == 22);
         }
 
         public static String frontCameraName = "HD_Pro_Webcam_C920";
@@ -76,8 +80,7 @@ public final class Constants {
     }
     
     public static final class AutoConstants {
-            public static PIDConstants PID_X_CONSTANTS = new PIDConstants(2.0, 0, 0);
-            public static PIDConstants PID_Y_CONSTANTS = new PIDConstants(2.0, 0, 0);
+            public static PIDConstants PID_X_CONSTANTS = new PIDConstants(3.5   , 0, .3);
             public static PIDConstants PID_ROT_CONSTANTS = new PIDConstants(5, 0, 0);
 
             public static double MASS_KG = 0;

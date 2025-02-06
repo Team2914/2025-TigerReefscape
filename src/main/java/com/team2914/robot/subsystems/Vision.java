@@ -14,6 +14,7 @@ import com.team2914.robot.Robot;
 import com.team2914.robot.Constants.VisionConstants;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
+import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
@@ -42,11 +43,7 @@ public class Vision extends SubsystemBase {
 
     private Vision() {
 
-         AprilTagFieldLayout fieldLayout = null;
-        try {
-            fieldLayout = AprilTagFieldLayout.loadFromResource("2025-reefscape.json");
-        } catch (IOException ignore) {
-        }
+        AprilTagFieldLayout fieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
 
         // Our camera is mounted 0.1 meters forward and 0.5 meters up from the robot pose,
         // (Robot pose is considered the center of rotation at the floor level, or Z = 0)

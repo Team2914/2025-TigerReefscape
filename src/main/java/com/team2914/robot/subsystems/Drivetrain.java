@@ -20,13 +20,19 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.team2914.robot.Constants.AutoConstants;
 import com.team2914.robot.Constants.DriveConstants;
+import com.team2914.robot.subsystems.simulations.SimAHRS;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
+
+  private Field2d field = new Field2d();
+
   // Create MAXSwerveModules
   private final MAXSwerveModule m_frontLeft = new MAXSwerveModule(
       DriveConstants.kFrontLeftDrivingCanId,
@@ -49,7 +55,7 @@ public class Drivetrain extends SubsystemBase {
       DriveConstants.kBackRightChassisAngularOffset);
 
   // The gyro sensor
-  private final AHRS m_gyro = new AHRS(AHRS.NavXComType.kMXP_SPI);
+  private final SimAHRS m_gyro = new SimAHRS();
 
   // Odometry class for tracking robot pose
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
@@ -68,6 +74,7 @@ public class Drivetrain extends SubsystemBase {
   /** Creates a new Drivetrain. */
   private Drivetrain() {
     HAL.report(tResourceType.kResourceType_RobotDrive, tInstances.kRobotDriveSwerve_MaxSwerve);
+    SmartDashboard.putData("Field", field);
 
     RobotConfig config = null;
     try {
@@ -126,6 +133,18 @@ public class Drivetrain extends SubsystemBase {
             m_rearLeft.getPosition(),
             m_rearRight.getPosition()
         });
+  }
+
+  @Override
+  public void simulationPeriodic() {
+    m_gyro.updateSim(
+      DriveConstants.kDriveKinematics,
+        new SwerveModuleState[] {
+            m_frontLeft.getState(),
+            m_frontRight.getState(),
+            m_rearLeft.getState(),
+            m_rearRight.getState()
+    });
   }
 
   /**
@@ -260,7 +279,7 @@ public class Drivetrain extends SubsystemBase {
 
   /** Zeroes the heading of the robot. */
   public void zeroHeading() {
-    m_gyro.reset();
+    m_gyro.getRealGyro().reset();
   }
 
   /**
@@ -278,6 +297,6 @@ public class Drivetrain extends SubsystemBase {
    * @return The turn rate of the robot, in degrees per second
    */
   public double getTurnRate() {
-    return m_gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+    return m_gyro.getRealGyro().getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
   }
 }
