@@ -5,6 +5,7 @@
 package com.team2914;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.team2914.Constants.AutoConstants;
 import com.team2914.Constants.VisionConstants;
 import com.team2914.subsystems.DriverController;
 import com.team2914.subsystems.Drivetrain;
@@ -71,13 +72,13 @@ public class RobotContainer {
 
                 if (!VisionConstants.closeAllignable(target.getFiducialId())) return;
 
-                PIDController controller = new PIDController(1, 0, 0);
+                PIDController rotationController = new PIDController(AutoConstants.PID_ROT_CONSTANTS.kP, AutoConstants.PID_ROT_CONSTANTS.kI, AutoConstants.PID_ROT_CONSTANTS.kD);
 
-                double rotationSpeed = controller.calculate(target.getYaw() /*, Math.PI */);
+                double rotationSpeed = rotationController.calculate(target.getYaw() /*, Math.PI */);
 
                 drivetrain.drive(0, 0, rotationSpeed, false);
 
-                controller.close();
+                rotationController.close();
               }
             },
             vision));
