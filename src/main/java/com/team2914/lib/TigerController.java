@@ -1,77 +1,75 @@
 package com.team2914.lib;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public abstract class TigerController {
-    protected final XboxController controller;
-    protected final CommandXboxController commandController;
+  protected final XboxController controller;
+  protected final CommandXboxController commandController;
 
-    //protected final Joystick joystick;
+  // protected final Joystick joystick;
 
-    public TigerController(int port) {
-        commandController = new CommandXboxController(port);
-        controller = commandController.getHID();
-        //joystick = new Joystick(port);
-    }
+  public TigerController(int port) {
+    commandController = new CommandXboxController(port);
+    controller = commandController.getHID();
+    // joystick = new Joystick(port);
+  }
 
-    public XboxController getController() {
-        return controller;
-    }
+  public XboxController getController() {
+    return controller;
+  }
 
-    public CommandXboxController getCommandController(){
-        return commandController;
-    }
+  public CommandXboxController getCommandController() {
+    return commandController;
+  }
 
-    public abstract void configureButtonBindings();
-    
-    public double getLeftTriggerAxis(){
-        return controller.getLeftTriggerAxis();
-    }
+  public abstract void configureButtonBindings();
 
-    public boolean getLeftBumper(){
-        return controller.getLeftBumper();
-    }
+  public double getLeftTriggerAxis() {
+    return controller.getLeftTriggerAxis();
+  }
 
-    public double getRightTriggerAxis(){
-        return controller.getRightTriggerAxis();
-    }
+  public boolean getLeftBumper() {
+    return controller.getLeftBumper();
+  }
 
-    public boolean getRightBumper(){
-        return controller.getRightBumper();
-    }
+  public double getRightTriggerAxis() {
+    return controller.getRightTriggerAxis();
+  }
 
-    public boolean getXButtonPressed(){
-        return controller.getXButtonPressed();
-    }
+  public boolean getRightBumper() {
+    return controller.getRightBumper();
+  }
 
-    public boolean getAButtonPressed(){
-        return controller.getAButtonPressed();
-    }
+  public boolean getXButtonPressed() {
+    return controller.getXButtonPressed();
+  }
 
-    public boolean getAButton(){
-        return controller.getAButton();
-    }
+  public boolean getAButtonPressed() {
+    return controller.getAButtonPressed();
+  }
 
-    public boolean getBButon(){
-        return controller.getBButton();
-    }
+  public boolean getAButton() {
+    return controller.getAButton();
+  }
 
-    public boolean getYButton(){
-        return controller.getYButton();
-    }
+  public boolean getBButon() {
+    return controller.getBButton();
+  }
 
-    public double getLeftX() {
-        return controller.getLeftX();
-    }
+  public boolean getYButton() {
+    return controller.getYButton();
+  }
 
-    public double getLeftY() {
-        return controller.getLeftY();
-    }
+  public double getLeftX() {
+    return controller.getLeftX();
+  }
 
-    public double getRightX() {
-        return controller.getRightX();
-    } 
+  public double getLeftY() {
+    return controller.getLeftY();
+  }
 
+  public double getRightX() {
+    return controller.getRightX();
+  }
 }
