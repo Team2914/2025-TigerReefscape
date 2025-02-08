@@ -2,6 +2,7 @@ package com.team2914.robot.subsystems;
 
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.team2914.robot.Constants.IntakeConstants;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -11,12 +12,12 @@ public class Intake extends SubsystemBase {
     public SparkMax spinner;
     
     private Intake() {
-        spinner = new SparkMax(15, MotorType.kBrushless);
+        spinner = new SparkMax(IntakeConstants.spinnerCanId, MotorType.kBrushless);
     }
 
     public void spin(boolean spinning, boolean invert){
         if (spinning) {
-            spinner.set(invert ? 0.3 : -0.3);
+            spinner.set(invert ? IntakeConstants.intakeSpeed : -IntakeConstants.intakeSpeed);
         } else {
             spinner.set(0);
         }

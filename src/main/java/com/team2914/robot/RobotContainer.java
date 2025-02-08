@@ -14,9 +14,6 @@ import com.team2914.robot.subsystems.Intake;
 import com.team2914.robot.subsystems.Vision;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.geometry.Transform2d;
-import edu.wpi.first.math.geometry.Transform3d;
-// import edu.wpi.first.math.controller.ClosedLoopController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -79,34 +76,15 @@ public class RobotContainer {
 
                 if(target == null) return;
 
-                System.out.println("Found target");
-
                 if(!VisionConstants.closeAllignable(target.getFiducialId())) return;
-
-                System.out.println("Alignable!");
                  
                 PIDController controller = new PIDController(1, 0, 0);
-                //while (vision.hasTargets() && !(target.getYaw() <= 1.5 && target.getYaw() > 0)) { //Fps Issue I think -j
-                    double rotationSpeed = controller.calculate(target.getYaw()/*, Math.PI */);
 
-                    System.out.println("rot " + rotationSpeed);
-                    System.out.println("a " + target.getYaw());
-                    drivetrain.drive(0, 0, rotationSpeed, false);
-                //}
+                double rotationSpeed = controller.calculate(target.getYaw()/*, Math.PI */);
+
+                drivetrain.drive(0, 0, rotationSpeed, false);
 
                 controller.close();
-               
-
-                //Position off of target (https://docs.photonvision.org/en/latest/docs/programming/photonlib/using-target-data.html)
-
-                
-                
-                /* 
-                System.out.println(PhotonUtils.getYawToPose(drivetrain.getPose(), PhotonUtils.estimateFieldToRobotAprilTag(target.getBestCameraToTarget(), null, null)));
-                if(target.getYaw() <= 1.5) return;
-                double rotationSpeed = controlller.calculate(target.getYaw(), Math.PI);
-                drivetrain.drive(0, 0, rotationSpeed, false, false);
-                */
                 
             }
             

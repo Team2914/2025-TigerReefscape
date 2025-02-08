@@ -150,4 +150,9 @@ public final class Constants {
 
         public static final double kGlobalRampRate = 0.02;
     }
+
+    public static final class IntakeConstants {
+        public static final int spinnerCanId = 0;
+        public static final double intakeSpeed = 0.3;
+    }
 }

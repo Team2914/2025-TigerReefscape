@@ -31,22 +31,13 @@ public class DriverController extends TigerController {
 
     @Override
     public void configureButtonBindings() {
-
-        commandController.b()
-            .onTrue(new RunCommand(() -> {
-                fieldRelative = !fieldRelative;
-
-                SmartDashboard.putBoolean("Driver/Field Relative", fieldRelative);
-            }, drivetrain));
         
+        // Kill bot
         commandController.start()
             .onTrue(new RunCommand(()->{
                 System.exit(0);
             }, drivetrain));
 
-        //TODO: Rotate buttons
-
-        
     }
 
     @Override
